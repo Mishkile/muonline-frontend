@@ -157,6 +157,9 @@ const Login = () => {
                   {errors.username}
                 </p>
               )}
+              <p className="mt-1 text-xs text-gold-300 opacity-80">
+                Login is case-insensitive (e.g., "Admin" = "admin")
+              </p>
             </div>
 
             {/* Password Field */}
