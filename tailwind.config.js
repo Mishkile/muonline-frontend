@@ -69,9 +69,9 @@ export default {
           950: '#0a0a0a',
         },
         mu: {
-          gold: '#d4af37',
-          orange: '#ff6b35',
-          red: '#cc2936',
+          gold: '#a08660',
+          orange: '#cd853f',
+          red: '#8b4513',
           brown: '#4a3728',
           darkbrown: '#2d1b13',
           black: '#000000',
@@ -100,8 +100,8 @@ export default {
           '50%': { transform: 'translateY(-20px)' },
         },
         glow: {
-          '0%': { boxShadow: '0 0 5px #0ea5e9, 0 0 10px #0ea5e9, 0 0 15px #0ea5e9' },
-          '100%': { boxShadow: '0 0 10px #0ea5e9, 0 0 20px #0ea5e9, 0 0 30px #0ea5e9' },
+          '0%': { boxShadow: '0 0 4px #a08660, 0 0 8px #a08660, 0 0 12px #a08660' },
+          '100%': { boxShadow: '0 0 8px #a08660, 0 0 15px #a08660, 0 0 20px #a08660' },
         },
         slideUp: {
           '0%': { transform: 'translateY(100%)', opacity: '0' },

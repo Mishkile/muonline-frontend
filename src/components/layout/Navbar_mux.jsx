@@ -48,9 +48,9 @@ const Navbar = () => {
   ];
 
   const socialLinks = [
-    { icon: Youtube, url: import.meta.env.VITE_YOUTUBE_URL || 'https://youtube.com', color: 'text-red-500' },
-    { icon: Facebook, url: import.meta.env.VITE_FACEBOOK_URL || 'https://facebook.com', color: 'text-blue-500' },
-    { icon: Instagram, url: import.meta.env.VITE_INSTAGRAM_URL || 'https://instagram.com', color: 'text-pink-500' },
+    { icon: Youtube, url: import.meta.env.VITE_YOUTUBE_URL || 'https://youtube.com', color: 'text-red-800' },
+    { icon: Facebook, url: import.meta.env.VITE_FACEBOOK_URL || 'https://facebook.com', color: 'text-blue-800' },
+    { icon: Instagram, url: import.meta.env.VITE_INSTAGRAM_URL || 'https://instagram.com', color: 'text-purple-800' },
   ];
 
   const quickLinks = [
