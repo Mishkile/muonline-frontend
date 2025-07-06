@@ -15,18 +15,19 @@ import {
 } from 'lucide-react';
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
+import config from '../config/env';
 
 const Downloads = () => {
   const downloadLinks = [
     {
       id: 'full-client',
       title: 'Full Game Client',
-      description: 'Complete DV-Team MU Online client with all files',
+      description: `Complete ${config.appName} client with all files`,
       size: '2.1 GB',
       type: 'primary',
       icon: HardDrive,
       requirements: 'Windows 7/8/10/11',
-      url: 'drive.google.com/file/d/1Xnk9m4G7h09UQ9DfyDxdwdRup34DXk79/view?usp=sharing'
+      url: config.downloadClientUrl
     },
     // {
     //   id: 'update-patch',
@@ -135,7 +136,7 @@ const Downloads = () => {
             Downloads
           </h1>
           <p className="text-xl text-gray-400 max-w-3xl mx-auto">
-            Download DV-Team MU Online and start your epic adventure
+            Download {config.appName} and start your epic adventure
           </p>
         </motion.div>
 

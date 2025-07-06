@@ -30,6 +30,7 @@ import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
 import { serverAPI, rankingsAPI } from '../services/api';
 import { useNavigate } from 'react-router-dom';
+import config from '../config/env';
 const Home = () => {
   const [serverStatus, setServerStatus] = useState(null);
   const [topPlayers, setTopPlayers] = useState([]);
@@ -52,19 +53,24 @@ const Home = () => {
       setTopPlayers(playersResponse.data.players);
     } catch (error) {
       console.error('Failed to fetch server data:', error);
+      // Set fallback data if API fails
+      setServerStatus({
+        statistics: {
+          playersOnline: 0,
+          totalAccounts: 0,
+          totalCharacters: 0,
+          totalGuilds: 0
+        }
+      });
+      setTopPlayers([]);
     } finally {
       setLoading(false);
     }
   };
 
-  const servers = [
-    { name: 'x10 Titan', online: 421, rate: 'x10', status: 'online' },
-    { name: 'x100 King', online: 312, rate: 'x100', status: 'online' },
-    { name: 'x1000 Jade', online: 1094, rate: 'x1000', status: 'online' },
-    { name: 'x5000 Prime', online: 299, rate: 'x5000', status: 'online' }
-  ];
-
-  const totalOnline = servers.reduce((sum, server) => sum + server.online, 0);
+  // Use real data or fallback
+  const playersOnline = serverStatus?.statistics?.playersOnline || 0;
+  const totalOnline = playersOnline;
 
   const newsItems = [
     {
@@ -117,14 +123,12 @@ const Home = () => {
                   SERVER STATUS
                 </h3>
                 <div className="space-y-2">
-                  {servers.map((server, index) => (
-                    <div key={index} className="flex justify-between items-center text-sm">
-                      <span className="retro-text-orange font-bold">{server.online}</span>
-                      <Link to="/server" className="text-gray-300 hover:retro-text-gold transition-colors">
-                        {server.name}
-                      </Link>
-                    </div>
-                  ))}
+                  <div className="flex justify-between items-center text-sm">
+                    <span className="retro-text-orange font-bold">{playersOnline}</span>
+                    <Link to="/server" className="text-gray-300 hover:retro-text-gold transition-colors">
+                      {config.serverName}
+                    </Link>
+                  </div>
                 </div>
                 <div className="mt-4 pt-4 border-t border-retro-700">
                   <div className="flex justify-between text-sm">
@@ -132,8 +136,12 @@ const Home = () => {
                     <span className="retro-text-orange font-bold">{totalOnline}</span>
                   </div>
                   <div className="flex justify-between text-sm">
-                    <span>Active Today</span>
-                    <span className="retro-text-gold">2734</span>
+                    <span>Total Characters</span>
+                    <span className="retro-text-gold">{serverStatus?.statistics?.totalCharacters || 0}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span>Total Accounts</span>
+                    <span className="retro-text-gold">{serverStatus?.statistics?.totalAccounts || 0}</span>
                   </div>
                 </div>
                 <div className="mt-4 text-center">
@@ -149,11 +157,11 @@ const Home = () => {
                   DOWNLOAD
                 </h3>
                 <p className="text-sm text-gray-400 mb-4">
-                  Files needed to play on our MUX Legend server
+                  Files needed to play on our {config.appName} server
                 </p>
-                <button onClick={() => navigate("/downloads")} className="retro-button w-full px-4 py-2 rounded flex items-center justify-center">
+                <button onClick={() => window.open(config.downloadClientUrl, '_blank')} className="retro-button w-full px-4 py-2 rounded flex items-center justify-center">
                   <Download className="w-4 h-4 mr-2" />
-                  Download Full Game Client (1.8 GB)
+                  Download Full Game Client (2.1 GB)
                 </button>
               </div>
 
@@ -179,10 +187,10 @@ const Home = () => {
               <div className="retro-card rounded-lg overflow-hidden">
                 <div className="relative p-8 text-center retro-server-status">
                   <h1 className="text-4xl font-bold mb-4 retro-gradient-text retro-glow">
-                    MUX LEGEND
+                    {config.appName.toUpperCase()}
                   </h1>
                   <p className="text-xl mb-6 retro-text-orange">
-                    Season 20 MU Online Private Server
+                    {config.serverSeason} MU Online Private Server
                   </p>
                   <div className="flex justify-center gap-4">
                     <button className="retro-button px-6 py-3 rounded font-bold">
@@ -312,13 +320,17 @@ const Home = () => {
               <div className="retro-card rounded p-4">
                 <h3 className="text-sm font-bold retro-text-gold mb-2 retro-glow">TOP PLAYERS</h3>
                 <div className="space-y-2">
-                  {topPlayers.slice(0, 5).map((player, index) => (
+                  {topPlayers.length > 0 ? topPlayers.slice(0, 5).map((player, index) => (
                     <div key={index} className="flex justify-between items-center text-xs">
                       <span className="text-gray-300">#{index + 1}</span>
-                      <span className="retro-text-orange hover:retro-text-gold cursor-pointer transition-colors">{player.name || `Player${index + 1}`}</span>
-                      <span className="retro-text-gold font-bold">{player.level || Math.floor(Math.random() * 400 + 200)}</span>
+                      <span className="retro-text-orange hover:retro-text-gold cursor-pointer transition-colors">{player.name}</span>
+                      <span className="retro-text-gold font-bold">{player.level}{player.resets > 0 ? ` (+${player.resets})` : ''}</span>
                     </div>
-                  ))}
+                  )) : (
+                    <div className="text-center text-gray-400 text-xs py-4">
+                      No players found
+                    </div>
+                  )}
                 </div>
                 <div className="mt-3">
                   <Link to="/rankings" className="retro-text-orange text-xs hover:retro-text-gold transition-colors">
