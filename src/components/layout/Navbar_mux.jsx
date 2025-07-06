@@ -74,7 +74,7 @@ const Navbar = () => {
   return (
     <>
       {/* Top Bar with Social and Quick Links */}
-      <div className="bg-retro-950 text-gray-400 text-xs py-2 border-b border-retro-800">
+      <div className="bg-retro-950 text-gray-400 text-xs py-2 border-b border-retro-800 retro-weathered">
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center">
             {/* Social Links */}
@@ -105,7 +105,7 @@ const Navbar = () => {
       </div>
 
       {/* Main Navigation */}
-      <nav className={`retro-nav sticky top-0 z-50 transition-all duration-300 ${
+      <nav className={`retro-nav retro-battle-worn sticky top-0 z-50 transition-all duration-300 ${
         scrolled ? 'shadow-2xl' : ''
       }`}>
         <div className="container mx-auto px-4">
@@ -164,14 +164,14 @@ const Navbar = () => {
                   </div>
                   <Link
                     to="/profile"
-                    className="retro-button px-3 py-1 rounded transition-all flex items-center space-x-1"
+                    className="retro-button retro-rust px-3 py-1 rounded transition-all flex items-center space-x-1"
                   >
                     <User className="h-4 w-4" />
                     <span>Profile</span>
                   </Link>
                   <button
                     onClick={logout}
-                    className="retro-button px-3 py-1 rounded transition-all flex items-center space-x-1 bg-mu-red hover:bg-red-700"
+                    className="retro-button retro-rust px-3 py-1 rounded transition-all flex items-center space-x-1 bg-mu-red hover:bg-red-700"
                   >
                     <LogOut className="h-4 w-4" />
                     <span>Logout</span>
@@ -181,14 +181,14 @@ const Navbar = () => {
                 <div className="flex items-center space-x-2">
                   <Link
                     to="/login"
-                    className="retro-button px-3 py-1 rounded transition-all flex items-center space-x-1"
+                    className="retro-button retro-rust px-3 py-1 rounded transition-all flex items-center space-x-1"
                   >
                     <LogIn className="h-4 w-4" />
                     <span>LOGIN</span>
                   </Link>
                   <Link
                     to="/register"
-                    className="retro-button px-3 py-1 rounded transition-all flex items-center space-x-1"
+                    className="retro-button retro-rust px-3 py-1 rounded transition-all flex items-center space-x-1"
                   >
                     <UserPlus className="h-4 w-4" />
                     <span>REGISTER</span>
@@ -212,7 +212,7 @@ const Navbar = () => {
           <div className={`lg:hidden overflow-hidden transition-all duration-300 ${
             isOpen ? 'max-h-screen opacity-100' : 'max-h-0 opacity-0'
           }`}>
-            <div className="px-4 py-4 space-y-4 border-t border-retro-700 retro-bg">
+            <div className="px-4 py-4 space-y-4 border-t border-retro-700 retro-bg retro-weathered">
               {isAuthenticated && (
                 <div className="flex items-center space-x-3 text-sm pb-4 border-b border-retro-700">
                   <div className="w-2 h-2 bg-mu-orange rounded-full retro-pulse"></div>
