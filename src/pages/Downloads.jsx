@@ -26,7 +26,7 @@ const Downloads = () => {
       type: 'primary',
       icon: HardDrive,
       requirements: 'Windows 7/8/10/11',
-      url: import.meta.env.VITE_DOWNLOAD_CLIENT_URL || 'https://drive.google.com/file/d/1Xnk9m4G7h09UQ9DfyDxdwdRup34DXk79/view?usp=sharing'
+      url: 'drive.google.com/file/d/1Xnk9m4G7h09UQ9DfyDxdwdRup34DXk79/view?usp=sharing'
     },
     // {
     //   id: 'update-patch',

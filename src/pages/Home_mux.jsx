@@ -29,11 +29,13 @@ import {
 import Button from '../components/ui/Button';
 import Card from '../components/ui/Card';
 import { serverAPI, rankingsAPI } from '../services/api';
-
+import { useNavigate } from 'react-router-dom';
 const Home = () => {
   const [serverStatus, setServerStatus] = useState(null);
   const [topPlayers, setTopPlayers] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchServerData();
@@ -149,7 +151,7 @@ const Home = () => {
                 <p className="text-sm text-gray-400 mb-4">
                   Files needed to play on our MUX Legend server
                 </p>
-                <button className="retro-button w-full px-4 py-2 rounded flex items-center justify-center">
+                <button onClick={() => navigate("/downloads")} className="retro-button w-full px-4 py-2 rounded flex items-center justify-center">
                   <Download className="w-4 h-4 mr-2" />
                   Download Full Game Client (1.8 GB)
                 </button>
