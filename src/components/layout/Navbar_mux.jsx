@@ -117,9 +117,9 @@ const Navbar = () => {
               </div>
               <div className="hidden sm:block">
                 <h1 className="text-2xl font-bold retro-gradient-text retro-glow">
-                  MUX LEGEND
+                  MISHKI MU
                 </h1>
-                <p className="text-xs retro-text-orange -mt-1">Season 20 MU Online</p>
+                <p className="text-xs retro-text-orange -mt-1">Season 19 Episode 2</p>
               </div>
             </Link>
 
