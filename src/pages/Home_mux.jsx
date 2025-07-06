@@ -35,11 +35,20 @@ const Home = () => {
   const [serverStatus, setServerStatus] = useState(null);
   const [topPlayers, setTopPlayers] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [eventTime, setEventTime] = useState('15:01:05');
 
   const navigate = useNavigate();
 
   useEffect(() => {
     fetchServerData();
+    
+    // Update event time every second
+    const timer = setInterval(() => {
+      const now = new Date();
+      setEventTime(now.toLocaleTimeString('en-US', { hour12: false }));
+    }, 1000);
+
+    return () => clearInterval(timer);
   }, []);
 
   const fetchServerData = async () => {
@@ -117,36 +126,36 @@ const Home = () => {
             
             {/* Server Status Section */}
             <div className="lg:col-span-1 space-y-4">
-              <div className="retro-card rounded p-4">
-                <h3 className="text-lg font-bold retro-text-gold mb-4 flex items-center retro-glow">
-                  <Server className="w-5 h-5 mr-2" />
+              <div className="retro-card rounded p-4 sparkle-bg border-neon-glow">
+                <h3 className="text-lg font-bold text-neon-gold mb-4 flex items-center">
+                  <Server className="w-5 h-5 mr-2 text-neon-orange" />
                   SERVER STATUS
                 </h3>
                 <div className="space-y-2">
                   <div className="flex justify-between items-center text-sm">
-                    <span className="retro-text-orange font-bold">{playersOnline}</span>
-                    <Link to="/server" className="text-gray-300 hover:retro-text-gold transition-colors">
+                    <span className="text-neon-orange font-bold">{playersOnline}</span>
+                    <Link to="/server" className="text-gray-300 hover:text-neon-gold transition-colors">
                       {config.serverName}
                     </Link>
                   </div>
                 </div>
-                <div className="mt-4 pt-4 border-t border-retro-700">
+                <div className="mt-4 pt-4 border-t border-neon-orange/30">
                   <div className="flex justify-between text-sm">
                     <span>Total Online</span>
-                    <span className="retro-text-orange font-bold">{totalOnline}</span>
+                    <span className="text-neon-orange font-bold">{totalOnline}</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span>Total Characters</span>
-                    <span className="retro-text-gold">{serverStatus?.statistics?.totalCharacters || 0}</span>
+                    <span className="text-neon-gold">{serverStatus?.statistics?.totalCharacters || 0}</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span>Total Accounts</span>
-                    <span className="retro-text-gold">{serverStatus?.statistics?.totalAccounts || 0}</span>
+                    <span className="text-neon-gold">{serverStatus?.statistics?.totalAccounts || 0}</span>
                   </div>
                 </div>
-                <div className="mt-4 text-center">
-                  <div className="text-xs text-gray-400">EVENT TIME</div>
-                  <div className="retro-text-gold font-mono retro-glow">15:01:05</div>
+                <div className="mt-4 text-center bg-warm-gradient p-2 rounded">
+                  <div className="text-xs text-gray-200">EVENT TIME</div>
+                  <div className="text-neon-gold font-mono text-lg">{eventTime}</div>
                 </div>
               </div>
 
@@ -193,52 +202,52 @@ const Home = () => {
                     {config.serverSeason} MU Online Private Server
                   </p>
                   <div className="flex justify-center gap-4">
-                    <button className="retro-button px-6 py-3 rounded font-bold">
+                    <button className="retro-button px-6 py-3 rounded font-bold bg-fire-gradient border-neon-glow hover:text-white">
                       <Play className="w-4 h-4 mr-2" />
                       PLAY NOW
                     </button>
-                    <button className="retro-button px-6 py-3 rounded">
+                    <Link to="/register" className="retro-button px-6 py-3 rounded bg-warm-gradient border-neon-glow">
                       <Users className="w-4 h-4 mr-2" />
                       REGISTER
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>
 
               {/* Last Forum Topics */}
-              <div className="retro-card rounded p-4">
-                <h3 className="text-lg font-bold retro-text-gold mb-4 flex items-center retro-glow">
-                  <MessageSquare className="w-5 h-5 mr-2" />
+              <div className="retro-card rounded p-4 border-neon-glow">
+                <h3 className="text-lg font-bold text-neon-gold mb-4 flex items-center">
+                  <MessageSquare className="w-5 h-5 mr-2 text-neon-purple" />
                   LAST TOPICS
                 </h3>
                 <div className="space-y-2">
                   {forumTopics.map((topic, index) => (
-                    <div key={index} className="flex justify-between items-center text-sm hover:bg-retro-800 p-2 rounded cursor-pointer transition-colors">
-                      <span className="retro-text-orange truncate hover:retro-text-gold">{topic.title}</span>
-                      <span className="text-gray-400 text-xs whitespace-nowrap ml-2">{topic.time}</span>
+                    <div key={index} className="flex justify-between items-center text-sm hover:bg-warm-gradient p-2 rounded cursor-pointer transition-colors">
+                      <span className="text-neon-orange truncate hover:text-neon-gold">{topic.title}</span>
+                      <span className="text-gray-300 text-xs whitespace-nowrap ml-2">{topic.time}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
               {/* News Section */}
-              <div className="retro-card rounded p-4">
-                <h3 className="text-lg font-bold retro-text-gold mb-4 flex items-center retro-glow">
-                  <FileText className="w-5 h-5 mr-2" />
+              <div className="retro-card rounded p-4 border-neon-glow sparkle-bg">
+                <h3 className="text-lg font-bold text-neon-gold mb-4 flex items-center">
+                  <FileText className="w-5 h-5 mr-2 text-neon-red" />
                   NEWS
                 </h3>
                 <div className="space-y-4">
                   {newsItems.map((news, index) => (
-                    <div key={index} className="border-b border-retro-700 pb-4 last:border-b-0">
+                    <div key={index} className="border-b border-neon-orange/30 pb-4 last:border-b-0">
                       <div className="flex justify-between items-start mb-2">
-                        <h4 className="retro-text-orange font-semibold hover:retro-text-gold cursor-pointer transition-colors">
+                        <h4 className="text-neon-orange font-semibold hover:text-neon-gold cursor-pointer transition-colors">
                           {news.title}
                         </h4>
-                        <span className="text-gray-400 text-sm">{news.date}</span>
+                        <span className="text-gray-300 text-sm">{news.date}</span>
                       </div>
-                      <p className="text-gray-300 text-sm mb-2">{news.excerpt}</p>
+                      <p className="text-gray-200 text-sm mb-2">{news.excerpt}</p>
                       <div className="flex justify-between items-center">
-                        <span className="text-xs text-gray-500">Comments: {news.comments}</span>
+                        <span className="text-xs text-neon-purple">Comments: {news.comments}</span>
                         <span className="retro-text-orange text-xs cursor-pointer hover:retro-text-gold transition-colors">
                           Read more →
                         </span>
@@ -292,48 +301,48 @@ const Home = () => {
               </div>
 
               {/* Characters Market */}
-              <div className="retro-card rounded p-4">
-                <h3 className="text-sm font-bold retro-text-gold mb-2 retro-glow">CHARACTERS MARKET</h3>
-                <p className="text-xs text-gray-400 mb-3">Last characters added on players market</p>
+              <div className="retro-card rounded p-4 border-neon-glow">
+                <h3 className="text-sm font-bold text-neon-gold mb-2">CHARACTERS MARKET</h3>
+                <p className="text-xs text-gray-300 mb-3">Last characters added on players market</p>
                 <div className="space-y-2 text-xs">
-                  <div className="flex justify-between">
-                    <span className="retro-text-orange hover:retro-text-gold cursor-pointer transition-colors">Yuna</span>
-                    <span className="retro-text-gold font-bold">1,200 Bon</span>
+                  <div className="flex justify-between hover:bg-warm-gradient/20 p-1 rounded">
+                    <span className="text-neon-orange hover:text-neon-gold cursor-pointer transition-colors">Yuna</span>
+                    <span className="text-neon-gold font-bold">1,200 Bon</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="retro-text-orange hover:retro-text-gold cursor-pointer transition-colors">EEwKa</span>
-                    <span className="retro-text-gold font-bold">12 Bon</span>
+                  <div className="flex justify-between hover:bg-warm-gradient/20 p-1 rounded">
+                    <span className="text-neon-orange hover:text-neon-gold cursor-pointer transition-colors">EEwKa</span>
+                    <span className="text-neon-gold font-bold">12 Bon</span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="retro-text-orange hover:retro-text-gold cursor-pointer transition-colors">Ayahuasca</span>
-                    <span className="retro-text-gold font-bold">240 Bon</span>
+                  <div className="flex justify-between hover:bg-warm-gradient/20 p-1 rounded">
+                    <span className="text-neon-orange hover:text-neon-gold cursor-pointer transition-colors">Ayahuasca</span>
+                    <span className="text-neon-gold font-bold">240 Bon</span>
                   </div>
                 </div>
-                <div className="mt-3">
-                  <span className="retro-text-orange text-xs cursor-pointer hover:retro-text-gold transition-colors">
+                <div className="mt-3 bg-fire-gradient/20 p-2 rounded">
+                  <span className="text-neon-orange text-xs cursor-pointer hover:text-neon-gold transition-colors">
                     Go to characters market →
                   </span>
                 </div>
               </div>
 
               {/* Rankings Preview */}
-              <div className="retro-card rounded p-4">
-                <h3 className="text-sm font-bold retro-text-gold mb-2 retro-glow">TOP PLAYERS</h3>
+              <div className="retro-card rounded p-4 border-neon-glow sparkle-bg">
+                <h3 className="text-sm font-bold text-neon-gold mb-2">TOP PLAYERS</h3>
                 <div className="space-y-2">
                   {topPlayers.length > 0 ? topPlayers.slice(0, 5).map((player, index) => (
-                    <div key={index} className="flex justify-between items-center text-xs">
-                      <span className="text-gray-300">#{index + 1}</span>
-                      <span className="retro-text-orange hover:retro-text-gold cursor-pointer transition-colors">{player.name}</span>
-                      <span className="retro-text-gold font-bold">{player.level}{player.resets > 0 ? ` (+${player.resets})` : ''}</span>
+                    <div key={index} className="flex justify-between items-center text-xs hover:bg-warm-gradient/30 p-1 rounded">
+                      <span className="text-neon-purple font-bold">#{index + 1}</span>
+                      <span className="text-neon-orange hover:text-neon-gold cursor-pointer transition-colors">{player.name}</span>
+                      <span className="text-neon-gold font-bold">{player.level}{player.resets > 0 ? ` (+${player.resets})` : ''}</span>
                     </div>
                   )) : (
-                    <div className="text-center text-gray-400 text-xs py-4">
+                    <div className="text-center text-gray-300 text-xs py-4">
                       No players found
                     </div>
                   )}
                 </div>
-                <div className="mt-3">
-                  <Link to="/rankings" className="retro-text-orange text-xs hover:retro-text-gold transition-colors">
+                <div className="mt-3 bg-fire-gradient/20 p-2 rounded">
+                  <Link to="/rankings" className="text-neon-orange text-xs hover:text-neon-gold transition-colors">
                     View all rankings →
                   </Link>
                 </div>
