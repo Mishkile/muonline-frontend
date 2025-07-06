@@ -18,5 +18,13 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     sourcemap: true,
+    // Ensure proper SPA routing support
+    rollupOptions: {
+      input: {
+        main: '/index.html'
+      }
+    }
   },
+  // Ensure proper base for deployment
+  base: '/',
 })
