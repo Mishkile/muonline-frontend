@@ -8,7 +8,7 @@ export const config = {
   appVersion: import.meta.env.VITE_APP_VERSION || '19.2.3',
   
   // Download Links
-  downloadClientUrl: import.meta.env.VITE_DOWNLOAD_CLIENT_URL || '#',
+  downloadClientUrl: "https://drive.google.com/file/d/1Xnk9m4G7h09UQ9DfyDxdwdRup34DXk79/view?usp=sharing",
   
   // Social Media Links
   youtubeUrl: import.meta.env.VITE_YOUTUBE_URL || 'https://youtube.com',

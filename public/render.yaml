@@ -1,0 +1,4 @@
+# Render configuration for SPA routing
+routes:
+  - src: "/(.*)"
+    dest: "/index.html"

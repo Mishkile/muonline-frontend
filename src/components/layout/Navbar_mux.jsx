@@ -18,7 +18,8 @@ import {
   ExternalLink,
   Facebook,
   Instagram,
-  Youtube
+  Youtube,
+  Settings  // Added Settings icon for admin panel
 } from 'lucide-react';
 import { useAuth } from '../../contexts/AuthContext';
 
@@ -69,7 +70,18 @@ const Navbar = () => {
     { name: 'Register', path: '/register', icon: UserPlus },
   ];
 
+  const adminItems = [
+    { name: 'Admin Panel', path: '/admin', icon: Settings },
+  ];
+
   const isActive = (path) => location.pathname === path;
+
+  // Check if user has admin privileges
+  const isAdminUser = user && (
+    (user.gmLevel && user.gmLevel >= 2) || 
+    (user.web_admin && user.web_admin >= 2) || 
+    user.role === 'admin'
+  );
 
   return (
     <>
@@ -151,6 +163,21 @@ const Navbar = () => {
                   </Link>
                 )
               ))}
+
+              {/* Admin Panel Link - Shown only for admin users */}
+              {isAdminUser && adminItems.map((item) => (
+                <a
+                  key={item.name}
+                  href="http://localhost:4200"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="retro-nav-item px-4 py-2 rounded transition-all flex items-center space-x-2 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700"
+                >
+                  <item.icon className="h-4 w-4" />
+                  <span className="font-medium">{item.name}</span>
+                  <ExternalLink className="h-3 w-3" />
+                </a>
+              ))}
             </div>
 
             {/* Auth Section */}
@@ -162,6 +189,22 @@ const Navbar = () => {
                     <span className="text-gray-300">Welcome, </span>
                     <span className="retro-text-gold font-semibold retro-glow">{user?.username}</span>
                   </div>
+                  
+                  {/* Admin Panel Button - Only show for admin users */}
+                  {isAdminUser && (
+                    <a
+                      href="http://localhost:4200"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="retro-button retro-rust px-3 py-1 rounded transition-all flex items-center space-x-1 bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 shadow-lg"
+                      title="Admin Panel"
+                    >
+                      <Settings className="h-4 w-4" />
+                      <span>ADMIN</span>
+                      <ExternalLink className="h-3 w-3" />
+                    </a>
+                  )}
+                  
                   <Link
                     to="/profile"
                     className="retro-button retro-rust px-3 py-1 rounded transition-all flex items-center space-x-1"
@@ -249,6 +292,21 @@ const Navbar = () => {
               ))}
 
               <div className="pt-4 border-t border-retro-700">
+                {/* Admin Panel Link for Mobile - Only show for admin users */}
+                {isAdminUser && (
+                  <a
+                    href="http://localhost:4200"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setIsOpen(false)}
+                    className="retro-nav-item flex items-center space-x-3 py-2 bg-gradient-to-r from-purple-600 to-blue-600 rounded mb-2"
+                  >
+                    <Settings className="h-5 w-5" />
+                    <span>ADMIN PANEL</span>
+                    <ExternalLink className="h-4 w-4" />
+                  </a>
+                )}
+                
                 {authItems.map((item) => (
                   item.path ? (
                     <Link
