@@ -397,7 +397,7 @@ const Register = () => {
               <div className="mu-subtitle">Registration</div>
             </div>
             <div className="text-center">
-              <div className="text-2xl font-bold text-purple-400">1000x</div>
+              <div className="text-2xl font-bold text-purple-400">9999x</div>
               <div className="mu-subtitle">EXP Rate</div>
             </div>
             <div className="text-center">

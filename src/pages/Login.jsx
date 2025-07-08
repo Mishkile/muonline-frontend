@@ -235,7 +235,7 @@ const Login = () => {
           </p>
           <div className="flex justify-center space-x-6 text-xs">
             <div className="text-center">
-              <div className="text-2xl font-bold gradient-text">1000x</div>
+              <div className="text-2xl font-bold gradient-text">9999x</div>
               <div className="mu-subtitle">EXP Rate</div>
             </div>
             <div className="text-center">
